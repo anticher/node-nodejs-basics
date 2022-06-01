@@ -2,9 +2,12 @@ import * as path from 'path'
 import { release, version } from 'os'
 import { createServer as createServerHttp } from 'http'
 import './files/c.js'
-import * as unknownObjectA from './files/a.json' assert {type: 'json'}
-import * as unknownObjectB from './files/b.json' assert {type: 'json'}
+
 import { fileURLToPath } from 'url'
+import { createRequire } from 'module'
+const customReq = createRequire(import.meta.url)
+const unknownObjectA = customReq("./files/a.json")
+const unknownObjectB = customReq("./files/b.json")
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
