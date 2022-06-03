@@ -11,12 +11,13 @@ const customTransform = new Transform({
             .reverse()
             .join('')
             .trim()
-        callback(null, resultString)
+        callback(null, resultString + '\n')
     }
 })
 
 export const transform = async () => {
     try {
+        console.log('enter your text\n')
         process.stdin.pipe(customTransform).pipe(process.stdout);
     }
     catch (e) {
