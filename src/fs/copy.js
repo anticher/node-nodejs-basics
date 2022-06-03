@@ -10,21 +10,29 @@ const makeCopy = async (from, to) => {
     fs.mkdir(to)
     const files = await fs.readdir(from)
     for (const file of files) {
-        await fs.copyFile(path.join(from, file), path.join(to, file));
+        await fs.copyFile(path.join(from, file), path.join(to, file))
     }
 }
 
 export const copy = async () => {
-    const folderPath = path.join(__dirname, 'files')
-    const copyPath = path.join(__dirname, 'files_copy')
+    try {
+        const folderPath = path.join(__dirname, 'files')
+        const copyPath = path.join(__dirname, 'files_copy')
 
-    const folderExists = await exists(folderPath)
-    const copyExists = await exists(copyPath)
-    if (copyExists || !folderExists) {
-        throw new Error('FS operation failed')
-    } else {
-        makeCopy(folderPath, copyPath)
+        const folderExists = await exists(folderPath)
+        const copyExists = await exists(copyPath)
+        if (copyExists || !folderExists) {
+            throw new Error('FS operation failed')
+        } else {
+            makeCopy(folderPath, copyPath)
+        }
     }
-};
+    catch (e) {
+        if (e.code === 'ENOENT') {
+            throw new Error('FS operation failed')
+        }
+        console.log("\x1b[31m", e)
+    }
+}
 
 copy()

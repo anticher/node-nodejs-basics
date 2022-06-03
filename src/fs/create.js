@@ -7,13 +7,19 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export const create = async () => {
-    const filePath = path.join(__dirname, 'files', 'fresh.txt')
-    const fileExists = await exists(filePath)
-    if (fileExists) {
-        throw new Error('FS operation failed')
-    } else {
-        await fs.writeFile(filePath, 'I am fresh and young')
+    try {
+        const filePath = path.join(__dirname, 'files', 'fresh.txt')
+        const fileExists = await exists(filePath)
+        if (fileExists) {
+            throw new Error('FS operation failed')
+        } else {
+            await fs.writeFile(filePath, 'I am fresh and young')
+        }
     }
+    catch (e) {
+        console.log("\x1b[31m", e)
+    }
+
 }
 
 create()

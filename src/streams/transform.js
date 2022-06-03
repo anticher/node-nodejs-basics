@@ -16,7 +16,12 @@ const customTransform = new Transform({
 })
 
 export const transform = async () => {
-    process.stdin.pipe(customTransform).pipe(process.stdout);
+    try {
+        process.stdin.pipe(customTransform).pipe(process.stdout);
+    }
+    catch (e) {
+        console.log("\x1b[31m", e)
+    }
 }
 
 transform()

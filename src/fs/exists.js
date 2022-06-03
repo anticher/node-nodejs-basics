@@ -2,9 +2,12 @@ import * as fs from 'fs/promises'
 
 export const exists = async (path) => {  
     try {
-      await fs.access(path)
+      await fs.stat(path)
       return true
-    } catch {
-      return false
+    } catch(e) {
+      if (e.code === 'ENOENT') {
+        return false
+      }
+      console.log('exists.js error', e.code)
     }
   }

@@ -6,8 +6,8 @@ import './files/c.js'
 import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
 const customReq = createRequire(import.meta.url)
-const unknownObjectA = customReq("./files/a.json")
-const unknownObjectB = customReq("./files/b.json")
+const unknownObjectA = customReq('./files/a.json')
+const unknownObjectB = customReq('./files/b.json')
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

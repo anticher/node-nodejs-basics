@@ -7,12 +7,17 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export const remove = async () => {
-    const filePath = path.join(__dirname, 'files', 'fileToRemove.txt')
-    const fileExists = await exists(filePath)
-    if (fileExists) {
-        await fs.unlink(filePath)
-    } else {
-        throw new Error('FS operation failed')
+    try {
+        const filePath = path.join(__dirname, 'files', 'fileToRemove.txt')
+        const fileExists = await exists(filePath)
+        if (fileExists) {
+            await fs.unlink(filePath)
+        } else {
+            throw new Error('FS operation failed')
+        }
+    }
+    catch (e) {
+        console.log("\x1b[31m", e)
     }
 }
 

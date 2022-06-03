@@ -42,7 +42,7 @@ export const performCalculations = async () => {
         console.log(result)
     }
     catch (e) {
-        console.log(e)
+        console.log("\x1b[31m", e)
     }
 
 }
