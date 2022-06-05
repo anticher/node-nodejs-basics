@@ -38,8 +38,7 @@ export const performCalculations = async () => {
             workerCount += 1
             workerDataCount += 1
         }
-        const result = await Promise.all(resultArr)
-        console.log(result)
+        return await Promise.all(resultArr)
     }
     catch (e) {
         console.log("\x1b[31m", e)
@@ -47,4 +46,4 @@ export const performCalculations = async () => {
 
 }
 
-performCalculations()
+performCalculations().then((result) => console.log(result))
